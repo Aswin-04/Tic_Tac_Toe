@@ -21,7 +21,7 @@
 SIZE = 3
 
 List = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
-
+List1 = []
 
 def user_prompt():
     """ Function prompting the user to press any key to start and q to quit """
@@ -44,9 +44,13 @@ def get_name(p):
             print("Please enter a valid name.")
 
 
-def switch():
+def switch(player):
     """" Switching players. """
-    pass
+    if player ==  List1[0]:
+        return "X"
+    else:
+        return "O"
+    
 
 def get_Input(player_0):
     """ Getting Input from player 1. """
@@ -63,8 +67,14 @@ def check_win_draw():
     """ Checking for win/draw. """
     pass
 
-def disp_table():
+
+def disp_table(current_player = None, Input = 0):
     """ Update and display the table. """
+
+    if Input != 0:
+        key = switch(current_player)
+        List[Input-1] = key
+
     num = 0
     print()
     for i in range(SIZE):
@@ -92,9 +102,17 @@ def main():
 
     user_prompt()
     p1 = get_name("Player1")
+    List1.append(p1)
     p2 = get_name("Player2")
+    List1.append(p2)
     disp_table()
-    Input = get_Input(p1)
+
+    while True:
+        Input = get_Input(p1)
+        disp_table(p1, Input)
+        Input = get_Input(p2)
+        disp_table(p2, Input)
+
 
     
 
