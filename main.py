@@ -46,8 +46,8 @@ def switch():
 
 def get_Input(player_0):
     """ Getting Input from player 1. """
+    print(f"{player_0}'s turn!")
     while True:
-        print(f"{player_0}'s turn!")
         try:
             inp = int(input("Enter a number from (1-9): "))
             return inp
