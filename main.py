@@ -1,4 +1,4 @@
-#                                   Tic_Tac_Toe 
+#                                                     Tic_Tac_Toe 
 
 #-> Prompting the user to press any key/q.
 
@@ -18,11 +18,16 @@
 
 #-> Checking for win/draw.
 
+import sys
+
 SIZE = 3
 
 List = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
 List1 = []
+List2 = []
 draw_count = []
+
+        #-----------------------------------------------------------------------------------------------------------#
 
 def user_prompt():
     """ Function prompting the user to press any key to start and q to quit """
@@ -33,8 +38,11 @@ def user_prompt():
     else:
         pass
 
+        #-----------------------------------------------------------------------------------------------------------#
+
 def get_name(p):
     """ Getting Players names as input. """
+
     while True:
         player_name = input(f"Enter {p}'s name: ").strip().capitalize()
 
@@ -44,26 +52,44 @@ def get_name(p):
         else:
             print("Please enter a valid name.")
 
+        #-----------------------------------------------------------------------------------------------------------#
 
 def switch(player):
     """" Switching players. """
+
     if player ==  List1[0]:
         return "X"
     else:
         return "O"
     
+        #-----------------------------------------------------------------------------------------------------------#
 
+    
 def get_Input(player_0):
     """ Getting Input from player 1. """
+
     print(f"{player_0}'s turn!")
     while True:
         try:
             inp = int(input("Enter a number from (1-9): "))
-            return inp
+            if len(List2) == 0:
+                List2.append(inp)
+                return inp
+            
+            elif len(List2) >= 1:
+                if inp not in List2:
+                    List2.append(inp)
+                    return inp
+                else:
+                    print("Invalid Input! The entered input's place is already occupied\n")
+                    continue
+
         except:
             print("Invalid input! ")
-    
 
+        #-----------------------------------------------------------------------------------------------------------#
+
+    
 def check_win_or_draw():
     """ Checking for win/draw. """
 
@@ -77,11 +103,15 @@ def check_win_or_draw():
             if List[count] == List[count+1] and List[count] == List[count+2]:
                 if List[count] ==  "X":
                     count+=SIZE
-                    return f"{List1[0]} wins the game"
+                    print(f"{List1[0]} wins the game")
+                    sys.exit("Game over.")
+                
                 
                 else:
                     count+=SIZE
-                    return f"{List[1]} wins the game"
+                    print(f"{List1[1]} wins the game")
+                    sys.exit("Game over.")                
+
                 
     #checking vertically for a match
     count = 0
@@ -93,10 +123,12 @@ def check_win_or_draw():
             if List[count] == List[count+SIZE] and List[count] ==  List[count+SIZE*2]:
                 if List[count] == "X":
                     count+=1
-                    return f"{List1[0]} wins the game"
+                    print(f"{List1[0]} wins the game")
+                    sys.exit("Game over.")                
                 else:
                     count+=1
-                    return f"{List[1]} wins the game"
+                    print(f"{List1[1]} wins the game")
+                    sys.exit("Game over.")                
 
     #checking diagonally for a match
     Mid_val = 4
@@ -106,28 +138,28 @@ def check_win_or_draw():
         else:
             if List[Mid_val] == List[Mid_val-Mid_val] and List[Mid_val] == List[Mid_val+Mid_val]:
                 if List[Mid_val] == "X":
-                    return f"{List1[0]} wins the game"
+                    print(f"{List1[0]} wins the game")
+                    sys.exit("Game over.")
                 else:
-                    return f"{List[1]} wins the game"
+                    print(f"{List1[1]} wins the game")
+                    sys.exit("Game over.")                
                 
             if List[Mid_val] == List[Mid_val-2] and List[Mid_val] == List[Mid_val+2]:
                 if List[Mid_val] == "X":
-                    return f"{List1[0]} wins the game"
+                    print(f"{List1[0]} wins the game")
+                    sys.exit("Game over.")                
                 else:
-                    return f"{List1[1]} wins the game"
+                    print(f"{List1[1]} wins the game")
+                    sys.exit("Game over.")
                 
     draw_count.append(1)
     if len(draw_count) == 8:
-        return "Match draw"
+        print("Its a Tie :( ")
+        sys.exit("Game over.")
     else:
-        return "\n"
+        print(end = "")
 
-
-
-
-
-
-
+        #-----------------------------------------------------------------------------------------------------------#
 
 def disp_table(current_player = None, Input = 0):
     """ Update and display the table. """
@@ -154,33 +186,30 @@ def disp_table(current_player = None, Input = 0):
         else:
             print()
 
-
-
-
+        #-----------------------------------------------------------------------------------------------------------#
 
 """ Main function"""
 def main():
 
     user_prompt()
-    p1 = get_name("Player1")
+    p1 = get_name("Player_1")
     List1.append(p1)
-    p2 = get_name("Player2")
+    p2 = get_name("Player_2")
     List1.append(p2)
     disp_table()
 
     while True:
         Input = get_Input(p1)
         disp_table(p1, Input)
-        print(check_win_or_draw())
+        check_win_or_draw()
         Input = get_Input(p2)
         disp_table(p2, Input)
-        print(check_win_or_draw())
+        check_win_or_draw()
 
-
-    
-
-
-
+        #-----------------------------------------------------------------------------------------------------------#
 
 if __name__ == "__main__":
     main()
+
+
+        #--------------------------------------------X The-end X----------------------------------------------------#
