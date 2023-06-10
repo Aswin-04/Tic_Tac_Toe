@@ -22,6 +22,7 @@ SIZE = 3
 
 List = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
 List1 = []
+draw_count = []
 
 def user_prompt():
     """ Function prompting the user to press any key to start and q to quit """
@@ -63,9 +64,69 @@ def get_Input(player_0):
             print("Invalid input! ")
     
 
-def check_win_draw():
+def check_win_or_draw():
     """ Checking for win/draw. """
-    pass
+
+    #checking horizontally for a match
+    count = 0
+    for i in range(SIZE):
+        if List[count] == "-" or List[count+1] == "-" or List[count+2] == "-":
+            count+=SIZE
+            continue
+        else:
+            if List[count] == List[count+1] and List[count] == List[count+2]:
+                if List[count] ==  "X":
+                    count+=SIZE
+                    return f"{List1[0]} wins the game"
+                
+                else:
+                    count+=SIZE
+                    return f"{List[1]} wins the game"
+                
+    #checking vertically for a match
+    count = 0
+    for i in range(SIZE):
+        if List[count] == "-" or List[count+SIZE] == "-" or List[count+SIZE*2] == "-":
+            count+=1
+            continue
+        else:
+            if List[count] == List[count+SIZE] and List[count] ==  List[count+SIZE*2]:
+                if List[count] == "X":
+                    count+=1
+                    return f"{List1[0]} wins the game"
+                else:
+                    count+=1
+                    return f"{List[1]} wins the game"
+
+    #checking diagonally for a match
+    Mid_val = 4
+    for i in range(SIZE):
+        if List[Mid_val] == "-":
+            break
+        else:
+            if List[Mid_val] == List[Mid_val-Mid_val] and List[Mid_val] == List[Mid_val+Mid_val]:
+                if List[Mid_val] == "X":
+                    return f"{List1[0]} wins the game"
+                else:
+                    return f"{List[1]} wins the game"
+                
+            if List[Mid_val] == List[Mid_val-2] and List[Mid_val] == List[Mid_val+2]:
+                if List[Mid_val] == "X":
+                    return f"{List1[0]} wins the game"
+                else:
+                    return f"{List1[1]} wins the game"
+                
+    draw_count.append(1)
+    if len(draw_count) == 8:
+        return "Match draw"
+    else:
+        return "\n"
+
+
+
+
+
+
 
 
 def disp_table(current_player = None, Input = 0):
@@ -110,8 +171,10 @@ def main():
     while True:
         Input = get_Input(p1)
         disp_table(p1, Input)
+        print(check_win_or_draw())
         Input = get_Input(p2)
         disp_table(p2, Input)
+        print(check_win_or_draw())
 
 
     
