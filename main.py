@@ -28,9 +28,17 @@ def user_prompt():
     else:
         pass
 
-def get_name():
+def get_name(p):
     """ Getting Players names as input. """
-    pass
+    while True:
+        player_name = input(f"Enter {p}'s name: ").strip().capitalize()
+
+        if player_name.isalpha():
+            break
+
+        else:
+            print("Please enter a valid name.")
+
 
 def switch():
     """" Switching players. """
@@ -58,6 +66,8 @@ def disp_table():
 def main():
 
     user_prompt()
+    p1 = get_name("Player1")
+    p2 = get_name("Player2")
 
 
 
