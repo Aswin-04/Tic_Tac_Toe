@@ -18,6 +18,10 @@
 
 #-> Checking for win/draw.
 
+SIZE = 3
+
+List = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
+
 
 def user_prompt():
     """ Function prompting the user to press any key to start and q to quit """
@@ -61,9 +65,23 @@ def check_win_draw():
 
 def disp_table():
     """ Update and display the table. """
-    pass
-
-
+    num = 0
+    print()
+    for i in range(SIZE):
+        for j in range(SIZE):
+            if j < 2:
+                print(List[num], end = " | ")
+                num+=1
+            else:
+                if i < 2:
+                    print(List[num], end = " ")
+                else:
+                    print(List[num])
+                num+=1
+        if i < 2:
+            print("\n----------")
+        else:
+            print()
 
 
 
@@ -75,6 +93,7 @@ def main():
     user_prompt()
     p1 = get_name("Player1")
     p2 = get_name("Player2")
+    disp_table()
     Input = get_Input(p1)
 
     
