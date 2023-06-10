@@ -34,7 +34,7 @@ def get_name(p):
         player_name = input(f"Enter {p}'s name: ").strip().capitalize()
 
         if player_name.isalpha():
-            break
+            return player_name
 
         else:
             print("Please enter a valid name.")
@@ -44,9 +44,16 @@ def switch():
     """" Switching players. """
     pass
 
-def get_Input1():
+def get_Input(player_0):
     """ Getting Input from player 1. """
-    pass
+    while True:
+        print(f"{player_0}'s turn!")
+        try:
+            inp = int(input("Enter a number from (1-9): "))
+            return inp
+        except:
+            print("Invalid input! ")
+    
 
 def check_win_draw():
     """ Checking for win/draw. """
@@ -68,6 +75,9 @@ def main():
     user_prompt()
     p1 = get_name("Player1")
     p2 = get_name("Player2")
+    Input = get_Input(p1)
+
+    
 
 
 
